@@ -1,75 +1,75 @@
-data "aws_vpc" "this" {
-  filter {
-    name   = "tag:Name"
-    values = [var.vpc_name]
-  }
-}
+# data "aws_vpc" "this" {
+#   filter {
+#     name   = "tag:Name"
+#     values = [var.vpc_name]
+#   }
+# }
 
-data "aws_subnets" "this_private" {
-  filter {
-    name   = "tag:Name"
-    values = ["${var.vpc_name}-private-*"]
-  }
+# data "aws_subnets" "this_private" {
+#   filter {
+#     name   = "tag:Name"
+#     values = ["${var.vpc_name}-private-*"]
+#   }
 
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpc.this.id]
-  }
-}
+#   filter {
+#     name   = "vpc-id"
+#     values = [data.aws_vpc.this.id]
+#   }
+# }
 
-data "aws_subnets" "this_public" {
-  filter {
-    name   = "tag:Name"
-    values = ["${var.vpc_name}-public-*"]
-  }
+# data "aws_subnets" "this_public" {
+#   filter {
+#     name   = "tag:Name"
+#     values = ["${var.vpc_name}-public-*"]
+#   }
 
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpc.this.id]
-  }
-}
+#   filter {
+#     name   = "vpc-id"
+#     values = [data.aws_vpc.this.id]
+#   }
+# }
 
-data "aws_iam_policy_document" "this_assume_role" {
-  statement {
-    actions = [
-      "sts:AssumeRole",
-    ]
+# data "aws_iam_policy_document" "this_assume_role" {
+#   statement {
+#     actions = [
+#       "sts:AssumeRole",
+#     ]
 
-    principals {
-      identifiers = ["ec2.amazonaws.com"]
-      type        = "Service"
-    }
-  }
-}
+#     principals {
+#       identifiers = ["ec2.amazonaws.com"]
+#       type        = "Service"
+#     }
+#   }
+# }
 
-data "aws_ami" "this" {
-  most_recent = true
-  owners      = ["591542846629"]
+# data "aws_ami" "this" {
+#   most_recent = true
+#   owners      = ["591542846629"]
 
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-ecs-hvm-*"]
-  }
+#   filter {
+#     name   = "name"
+#     values = ["amzn2-ami-ecs-hvm-*"]
+#   }
 
-  filter {
-    name   = "root-device-type"
-    values = ["ebs"]
-  }
+#   filter {
+#     name   = "root-device-type"
+#     values = ["ebs"]
+#   }
 
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-}
+#   filter {
+#     name   = "virtualization-type"
+#     values = ["hvm"]
+#   }
+# }
 
-data "aws_security_group" "this_private" {
-  filter {
-    name   = "tag:Name"
-    values = ["${var.vpc_name}-private"]
-  }
+# data "aws_security_group" "this_private" {
+#   filter {
+#     name   = "tag:Name"
+#     values = ["${var.vpc_name}-private"]
+#   }
 
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpc.this.id]
-  }
-}
+#   filter {
+#     name   = "vpc-id"
+#     values = [data.aws_vpc.this.id]
+#   }
+# }
