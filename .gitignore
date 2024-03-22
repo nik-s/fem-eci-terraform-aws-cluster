@@ -32,3 +32,7 @@ example: *tfplan*
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+# misc
+.DS_Store
+.infracost
